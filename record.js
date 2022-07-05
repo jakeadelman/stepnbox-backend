@@ -65,6 +65,7 @@ recordRoutes.route("/record/add").post(function (req, response) {
  
   let mb = 'mb'+req.body.mblvl.toString()
   console.log('creating mb')
+  console.log(db_connect)
     db_connect.collection(mb).insertOne(myobj, function (err, res) {
       if (err) throw err;
       response.json(res);
