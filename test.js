@@ -9,15 +9,10 @@ async function main(){
     
     try {
         await client.connect();
+        console.log("connected")
         const boxes = client.db("boxes").collection("mb1")
-        const boxesGem1Luck = boxes.find({gem1luck: 1})
-        // console.log(JSON.parse(JSON.stringify(boxesGem1Luck)))
-        // console.log(boxesGem1Luck)
-        boxesGem1Luck.forEach(box => console.log(box))
-
-        // client.db().collection('boxes').find().each(function(error, item) {
-        //     // console .log your item or do something else with it
-        //    });
+        let deleted = await boxes.deleteMany({})
+        console.log(deleted)
     }catch(e){
         console.log(e)
 
