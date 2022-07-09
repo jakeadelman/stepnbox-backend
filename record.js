@@ -38,28 +38,103 @@ recordRoutes.route("/record/find/:id").get(function (req, res) {
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
-      getProbabilities.getPr(result).then((data) => {
-        res.send(data);
-      });
+      // console.log(result);
+      if (boxLvl == "mb1" || boxLvl == "mb2" || boxLvl == "mb3") {
+        getProbabilities.getPr1(result).then((data) => {
+          res.send(data);
+        });
+      }
+      if (boxLvl == "mb4" || boxLvl == "mb5") {
+        getProbabilities.getPr2(result).then((data) => {
+          res.send(data);
+        });
+      }
+      if (
+        boxLvl == "mb6" ||
+        boxLvl == "mb7" ||
+        boxLvl == "mb8" ||
+        boxLvl == "mb9" ||
+        boxLvl == "mb10"
+      ) {
+        getProbabilities.getPr3(result).then((data) => {
+          res.send(data);
+        });
+      }
     });
 });
 
 // This section will help you create a new record.
 recordRoutes.route("/record/add").post(function (req, response) {
   let db_connect = dbo.getDb();
-  console.log(typeof req.body.gem1luck);
-  console.log(req.body);
+  // console.log(typeof req.body.gem1luck);
+  // console.log(req.body);
   //  let gem1luck = req.body.gem1luck.toString()
-  let myobj = {
-    gem1luck: parseInt(req.body.gem1luck),
-    gst: parseInt(req.body.gst),
-    gem1efficiency: parseInt(req.body.gem1efficiency),
-    gem1resillience: parseInt(req.body.gem1resillience),
-    gem1comfort: parseInt(req.body.gem1comfort),
-  };
 
+  let myobj = {};
+  if (req.body.mblvl == 1 || req.body.mblvl == 2) {
+    myobj = {
+      gem1luck: parseInt(req.body.gem1luck),
+      gst: parseInt(req.body.gst),
+      gem1efficiency: parseInt(req.body.gem1efficiency),
+      gem1resillience: parseInt(req.body.gem1resillience),
+      gem1comfort: parseInt(req.body.gem1comfort),
+      commonScroll: parseInt(req.body.commonScroll),
+      uncommonScroll: parseInt(req.body.uncommonScroll),
+    };
+  }
+  if (req.body.mblvl == 3 || req.body.mblvl == 4 || req.body.mblvl == 5) {
+    myobj = {
+      gem1luck: parseInt(req.body.gem1luck),
+      gst: parseInt(req.body.gst),
+      gem1efficiency: parseInt(req.body.gem1efficiency),
+      gem1resillience: parseInt(req.body.gem1resillience),
+      gem1comfort: parseInt(req.body.gem1comfort),
+      commonScroll: parseInt(req.body.commonScroll),
+      uncommonScroll: parseInt(req.body.uncommonScroll),
+      gem2efficiency: parseInt(req.body.gem2efficiency),
+      gem2luck: parseInt(req.body.gem2luck),
+      gem2resillience: parseInt(req.body.gem2resillience),
+      gem2comfort: parseInt(req.body.gem2comfort),
+      // gem3efficiency: parseInt(req.body.gem3efficiency),
+      // gem3luck: parseInt(req.body.gem3luck),
+      // gem3resillience: parseInt(req.body.gem3resillience),
+      // gem3comfort: parseInt(req.body.gem3comfort),
+      rareScroll: parseInt(req.body.rareScroll),
+    };
+  }
+
+  if (
+    req.body.mblvl == 6 ||
+    req.body.mblvl == 7 ||
+    req.body.mblvl == 8 ||
+    req.body.mblvl == 9 ||
+    req.body.mblvl == 10
+  ) {
+    console.log("in my obj");
+    myobj = {
+      gem1luck: parseInt(req.body.gem1luck),
+      gst: parseInt(req.body.gst),
+      gem1efficiency: parseInt(req.body.gem1efficiency),
+      gem1resillience: parseInt(req.body.gem1resillience),
+      gem1comfort: parseInt(req.body.gem1comfort),
+      commonScroll: parseInt(req.body.commonScroll),
+      uncommonScroll: parseInt(req.body.uncommonScroll),
+      gem2efficiency: parseInt(req.body.gem2efficiency),
+      gem2luck: parseInt(req.body.gem2luck),
+      gem2resillience: parseInt(req.body.gem2resillience),
+      gem2comfort: parseInt(req.body.gem2comfort),
+      gem3efficiency: parseInt(req.body.gem3efficiency),
+      gem3luck: parseInt(req.body.gem3luck),
+      gem3resillience: parseInt(req.body.gem3resillience),
+      gem3comfort: parseInt(req.body.gem3comfort),
+      rareScroll: parseInt(req.body.rareScroll),
+      epicScroll: parseInt(req.body.epicScroll),
+    };
+  }
+  console.log("//");
   let mb = "mb" + req.body.mblvl.toString();
   console.log("creating mb");
+  console.log(myobj);
   console.log(db_connect);
   db_connect.collection(mb).insertOne(myobj, function (err, res) {
     if (err) throw err;
