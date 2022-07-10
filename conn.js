@@ -27,34 +27,3 @@ module.exports = {
     return _db;
   },
 };
-
-// async function main(){
-//     const uri = "mongodb+srv://manx:jakeadelman@cluster0.saxhjhz.mongodb.net/?retryWrites=true&w=majority"
-//     const client = new MongoClient(uri);
-
-// try {
-//     await client.connect();
-//     const db = client.db("boxes")
-
-//     const col = db.collection("mb1")
-
-//     let mb1document = {
-//         "gem1luck": 1,
-//         "gst": 5
-//     }
-
-//     const p = await col.insertOne(mb1document);
-
-//     const myDoc = await col.findOne();
-
-//     console.log(myDoc)
-
-// } catch (e) {
-//     console.error(e);
-// } finally {
-//     await client.close();
-// }
-
-// }
-
-// main().catch(console.error);

@@ -3,24 +3,32 @@ async function getPr1(data) {
     let resultArray = [];
 
     data.map((item) => {
-      let isFound = resultArray.find((object) => {
-        object.gem1luck == item.gem1luck &&
+      // for (let i = 0; i < data.length; i++) {
+      // let item = data[i];
+      let isFound = resultArray.find(
+        (object) =>
+          object.gst == item.gst &&
+          object.gem1luck == item.gem1luck &&
           object.gem1efficiency == item.gem1efficiency &&
           object.gem1resillience == item.gem1resillience &&
           object.gem1comfort == item.gem1comfort &&
-          object.gst == item.gst &&
           object.commonScroll == item.commonScroll &&
-          object.uncommonScroll == item.uncommonScroll;
-      });
+          object.uncommonScroll == item.uncommonScroll
+      );
+
       if (isFound == undefined) {
         item.times = 1;
         resultArray.push(item);
+        // console.log(resultArray);
       } else {
-        item.times++;
+        isFound.times++;
       }
     });
+    // }
+    console.log(resultArray);
     let newArr = getArray(resultArray);
     let final = getPercent(newArr);
+    console.log(final);
     resolve(final);
   });
 }
@@ -30,8 +38,9 @@ async function getPr2(data) {
     let resultArray = [];
 
     data.map((item) => {
-      const isFound = resultArray.find((object) => {
-        object.gem1luck == item.gem1luck &&
+      const isFound = resultArray.find(
+        (object) =>
+          object.gem1luck == item.gem1luck &&
           object.gem1efficiency == item.gem1efficiency &&
           object.gem1resillience == item.gem1resillience &&
           object.gem1comfort == item.gem1comfort &&
@@ -42,8 +51,8 @@ async function getPr2(data) {
           object.gem2efficiency == item.gem2efficiency &&
           object.gem2luck == item.gem2luck &&
           object.gem2resillience == object.gem2resillience &&
-          object.gem2comfort == object.gem2comfort;
-      });
+          object.gem2comfort == object.gem2comfort
+      );
       if (isFound == undefined) {
         item.times = 1;
         resultArray.push(item);
@@ -51,8 +60,10 @@ async function getPr2(data) {
         item.times++;
       }
     });
+    console.log(resultArray);
     let newArr = getArray(resultArray);
     let final = getPercent(newArr);
+    console.log(final);
     resolve(final);
   });
 }
@@ -62,8 +73,9 @@ async function getPr3(data) {
     let resultArray = [];
     // console.log(data);
     data.map((item) => {
-      const isFound = resultArray.find((object) => {
-        object.gem1luck == item.gem1luck &&
+      const isFound = resultArray.find(
+        (object) =>
+          object.gem1luck == item.gem1luck &&
           object.gem1efficiency == item.gem1efficiency &&
           object.gem1resillience == item.gem1resillience &&
           object.gem1comfort == item.gem1comfort &&
@@ -79,8 +91,8 @@ async function getPr3(data) {
           object.gem3efficiency == object.gem3efficiency &&
           object.gem3luck == object.gem3luck &&
           object.gem3resillience == object.gem3resillience &&
-          object.gem3comfort == object.gem3comfort;
-      });
+          object.gem3comfort == object.gem3comfort
+      );
 
       if (isFound == undefined) {
         item.times = 1;
